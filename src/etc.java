@@ -285,6 +285,8 @@ public class etc {
      * @return
      */
     public boolean parseConsoleCommand(String command, MinecraftServer server) {
+	if(this.server == null)
+		this.server = server;
         String[] split = command.split(" ");
         if ((Boolean)getLoader().callHook(PluginLoader.Hook.SERVERCOMMAND, new Object[] { split }))
             return true;
