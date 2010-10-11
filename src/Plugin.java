@@ -142,4 +142,28 @@ public abstract class Plugin {
      */
     public void onArmSwing(Player player) { }
 
+    /**
+     * Called when a player's inventory is modified.
+     * @param player player who's inventory was modified
+     * @return true if you want any changes to be reverted
+     */
+    public boolean onInventoryChange(Player player) { return false; }
+
+    /**
+     * Called when either a sign, chest or furnace is changed.
+     * @param player player who changed it
+     * @param block complex block that changed
+     * @return true if you want any changes to be reverted
+     */
+    public boolean onComplexBlockChange(Player player, ComplexBlock block) { return false; }
+
+    /**
+     * Called when either a sign, chest or furnace is sent to a
+     * player
+     * @param player player who the block is being sent to
+     * @param block complex block that's being sent
+     * @return true if you want the chest, furnace or sign to be
+     * empty
+     */
+    public boolean onSendComplexBlock(Player player, ComplexBlock block) { return false; }
 }
