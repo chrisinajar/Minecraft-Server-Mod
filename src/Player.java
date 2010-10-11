@@ -581,14 +581,6 @@ public class Player {
         return muted;
     }
 
-    /**
-     * Returns item id in player's hand
-     * @return
-     */
-    public int getItemInHand() {
-        return user.a.getItemInHand();
-    }
-
     /*
      * Checks to see if this player is in any groups
      * @return true if this player is in any group
