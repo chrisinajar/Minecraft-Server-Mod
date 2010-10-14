@@ -40,6 +40,15 @@ public class Inventory extends ItemArray {
      * @param amount
      */
     public void giveItem(int itemId, int amount) {
+        if (amount == -1) {
+            int emptySlot = getEmptySlot();
+            if (emptySlot == -1)
+                user.getPlayer().giveItemDrop(itemId, -1);
+            else
+                addItem(new Item(itemId, 255, emptySlot));
+            return;
+        }
+
         int temp = amount;
         do {
             int amountToAdd = temp >= 64 ? 64 : temp;
@@ -72,14 +81,7 @@ public class Inventory extends ItemArray {
         } while (temp > 0);
         
         if (temp > 0) { //If the inventory's full it'll drop the rest on the ground.
-            do {
-                if (temp - 64 >= 64) {
-                    user.a(new gp(itemId, 64));
-                } else {
-                    user.a(new gp(itemId, temp));
-                }
-                temp -= 64;
-            } while (temp > 0);
+            user.getPlayer().giveItemDrop(itemId, temp);
         }
     }
 

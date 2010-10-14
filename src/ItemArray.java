@@ -15,7 +15,7 @@ public abstract class ItemArray {
             return;
 
         int slot = item.getSlot();
-        if (slot < 37 && slot >= 0) {
+        if (slot < getArray().length && slot >= 0) {
             if (item.getAmount() <= 0)
                 getArray()[slot] = null;
             else if(Item.isValidItem(item.getItemId()))
@@ -35,7 +35,7 @@ public abstract class ItemArray {
      * @return item
      */
     public Item getItemFromSlot(int slot) {
-        if (slot < 37 && slot >= 0)
+        if (slot < getArray().length && slot >= 0)
             if (getArray()[slot] != null)
                 return new Item(getArray()[slot].c, getArray()[slot].a, slot);
         return null;
@@ -90,7 +90,7 @@ public abstract class ItemArray {
      * @param slot slot to remove item from
      */
     public void removeItem(int slot) {
-        if (slot < 37 && slot >= 0)
+        if (slot < getArray().length && slot >= 0)
             getArray()[slot] = null;
     }
 
@@ -108,8 +108,8 @@ public abstract class ItemArray {
             if (getArray()[i].c == itemId) {
                 int tempAmount = getArray()[i].a;
                 tempAmount -= amount;
+                amount -= getArray()[i].a;
                 if (tempAmount <= 0) {
-                    amount -= getArray()[i].a;
                     getArray()[i] = null;
                 } else {
                     getArray()[i].a = tempAmount;
